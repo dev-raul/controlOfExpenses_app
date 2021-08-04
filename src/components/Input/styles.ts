@@ -15,8 +15,7 @@ export const TextInput = styled.TextInput<TextInputProps>`
   border-bottom-color: ${({isFocused, isValue, theme}) =>
     isFocused || isValue ? theme.colors.primary : theme.colors.gray};
   color: ${({theme}) => theme.colors.background};
-  font-size: 18px;
-  text-align: center;
+  font-size: 14px;
   padding: 0 15px;
   height: 46px;
   width: 100%;
@@ -28,4 +27,13 @@ export const TextInput = styled.TextInput<TextInputProps>`
     css`
       border-bottom-color: ${theme.colors.red};
     `}
+`;
+
+export const ErrorMessage = styled.Text`
+  font-size: 12px;
+  text-align: right;
+  color: ${({theme}) => theme.colors.heading};
+  margin-top: 5px;
+  font-family: ${({theme}) => theme.fonts.heading};
+  color: ${({theme}) => theme.colors.red};
 `;

@@ -2,7 +2,7 @@ import React from 'react';
 import {TextInputProps} from 'react-native';
 import {useTheme} from 'styled-components';
 
-import {Container, TextInput} from './styles';
+import {Container, ErrorMessage, TextInput} from './styles';
 interface InputProps extends TextInputProps {
   error?: string;
 }
@@ -15,6 +15,7 @@ export const Input = ({error, ...props}: InputProps) => {
         placeholderTextColor={colors.heading}
         {...props}
       />
+      {!!error && <ErrorMessage>{error}</ErrorMessage>}
     </Container>
   );
 };

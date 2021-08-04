@@ -1,8 +1,8 @@
 import {Container, Input} from '@components';
+import {SignInSchemaValidatorData} from '@helpers';
 import {Formik} from 'formik';
 import React, {useCallback} from 'react';
 import {Button} from 'react-native';
-import {SignInSchemaValidatorData} from '../../../helpers/validators';
 import {Content, Form} from './styles';
 
 interface SignInData {
