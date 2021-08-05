@@ -1,1 +1,1 @@
-export * from './SingIn';
+export * from './Auth';

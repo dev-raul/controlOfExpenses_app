@@ -2,7 +2,7 @@ import {fontsNames} from '@utils';
 import {DefaultTheme} from 'styled-components';
 export const dark: DefaultTheme = {
   colors: {
-    primary: '#9792E3',
+    primary: '#3490dc',
     secundary: '#7F7CAF',
     background: '#282a36',
 
