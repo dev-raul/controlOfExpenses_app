@@ -22,12 +22,14 @@ import {
   withTiming,
 } from 'react-native-reanimated';
 import {ForgetPasswordSchemaValidatorData} from '@helpers';
+import {useNavigation} from '@react-navigation/core';
 interface ForgetPasswordData {
   email: string;
 }
 const {width} = Dimensions.get('screen');
 export const ForgetPassword = () => {
   const [loading, setLoading] = useState(false);
+  const {navigate} = useNavigation();
 
   const startAnimated = useSharedValue(0);
   useEffect(() => {
@@ -57,11 +59,17 @@ export const ForgetPassword = () => {
     };
   }, [startAnimated.value]);
 
-  const handleForgetPassword = useCallback((values: ForgetPasswordData) => {
-    console.log(values);
-    setLoading(true);
-    setTimeout(() => setLoading(false), 5000);
-  }, []);
+  const handleForgetPassword = useCallback(
+    (values: ForgetPasswordData) => {
+      console.log(values);
+      setLoading(true);
+      setTimeout(() => {
+        setLoading(false);
+        navigate('Confirmation' as never);
+      }, 5000);
+    },
+    [navigate],
+  );
   return (
     <Container>
       <Content>
