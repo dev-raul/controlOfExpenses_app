@@ -22,3 +22,7 @@ export const TextButton = styled.Text<TextButtonProps>`
   font-size: 16px;
   color: ${({textColor, theme}) => textColor || theme.colors.white};
 `;
+
+export const ButtonLoading = styled.ActivityIndicator`
+  margin-left: 10;
+`;
