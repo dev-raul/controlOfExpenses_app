@@ -24,5 +24,5 @@ export const TextButton = styled.Text<TextButtonProps>`
 `;
 
 export const ButtonLoading = styled.ActivityIndicator`
-  margin-left: 10;
+  margin-left: 10px;
 `;

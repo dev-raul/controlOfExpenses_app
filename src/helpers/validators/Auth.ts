@@ -27,3 +27,8 @@ export const SignInSchemaValidatorData = Yup.object().shape({
     )
     .min(6, 'mínimo de 6 caracteres'),
 });
+export const ForgetPasswordSchemaValidatorData = Yup.object().shape({
+  email: Yup.string()
+    .required('email obrigatório')
+    .email('email inválido, ex: mail@mymoney.com'),
+});

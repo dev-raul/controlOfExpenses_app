@@ -29,6 +29,12 @@ export const LogoText = styled.Text`
   color: ${({theme}) => theme.colors.heading};
   font-family: ${({theme}) => theme.fonts.logoTitle};
 `;
+export const SubTitle = styled.Text`
+  font-size: 16px;
+  text-align: center;
+  color: ${({theme}) => theme.colors.heading};
+  font-family: ${({theme}) => theme.fonts.heading};
+`;
 export const ForgetPassword = styled.TouchableOpacity`
   justify-content: center;
   align-items: center;

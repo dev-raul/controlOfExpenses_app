@@ -1,8 +1,6 @@
 import {Button, Container, Input} from '@components';
-import {SignInSchemaValidatorData} from '@helpers';
 import {Formik} from 'formik';
-import React, {useCallback, useEffect, useRef, useState} from 'react';
-import {Dimensions, TextInput} from 'react-native';
+import React, {useCallback, useEffect, useState} from 'react';
 import Lottie from 'lottie-react-native';
 import {
   ScrollContent,
@@ -10,31 +8,25 @@ import {
   Header,
   Main,
   Footer,
-  LogoText,
+  SubTitle,
   Form,
-  ForgetPassword,
-  ForgetPasswordText,
 } from '../styles';
 import logoMoneyLottie from '../../../assets/lottie/graph.json';
-import FontAwesome from 'react-native-vector-icons/FontAwesome';
-import {useTheme} from 'styled-components';
+import {Dimensions} from 'react-native';
 import {
+  Easing,
+  Extrapolate,
+  interpolate,
+  useAnimatedStyle,
   useSharedValue,
   withTiming,
-  Easing,
-  useAnimatedStyle,
-  interpolate,
-  Extrapolate,
 } from 'react-native-reanimated';
-import {useNavigation} from '@react-navigation/core';
-interface SignInData {
-  username: string;
-  password: string;
+import {ForgetPasswordSchemaValidatorData} from '@helpers';
+interface ForgetPasswordData {
+  email: string;
 }
 const {width} = Dimensions.get('screen');
-export const SignIn = () => {
-  const {colors} = useTheme();
-  const {navigate} = useNavigation();
+export const ForgetPassword = () => {
   const [loading, setLoading] = useState(false);
 
   const startAnimated = useSharedValue(0);
@@ -65,21 +57,19 @@ export const SignIn = () => {
     };
   }, [startAnimated.value]);
 
-  const passwordRef = useRef<TextInput>(null);
-  const handleSingIn = useCallback((values: SignInData) => {
+  const handleForgetPassword = useCallback((values: ForgetPasswordData) => {
     console.log(values);
     setLoading(true);
     setTimeout(() => setLoading(false), 5000);
   }, []);
-
   return (
     <Container>
       <Content>
         <ScrollContent>
           <Formik
-            validationSchema={SignInSchemaValidatorData}
-            initialValues={{username: '', password: ''}}
-            onSubmit={handleSingIn}>
+            validationSchema={ForgetPasswordSchemaValidatorData}
+            initialValues={{email: ''}}
+            onSubmit={handleForgetPassword}>
             {({
               handleChange,
               handleBlur,
@@ -96,52 +86,30 @@ export const SignIn = () => {
                     source={logoMoneyLottie}
                     autoPlay
                   />
-                  <LogoText>MyMoney</LogoText>
+                  <SubTitle>
+                    Informe o seu email para prosseguir com a recuperação 😀️
+                  </SubTitle>
                 </Header>
                 <Main>
                   <Input
-                    placeholder="Usuário"
-                    onChangeText={handleChange('username')}
-                    onBlur={handleBlur('username')}
-                    value={values.username}
-                    error={touched.username ? errors.username : ''}
-                    autoCorrect={false}
-                    autoCapitalize="none"
-                    returnKeyType="next"
-                    onSubmitEditing={() => passwordRef.current?.focus()}
-                    editable={!loading}
-                  />
-                  <Input
-                    ref={passwordRef}
-                    placeholder="Senha"
-                    onChangeText={handleChange('password')}
-                    onBlur={handleBlur('password')}
-                    value={values.password}
-                    error={touched.password ? errors.password : ''}
-                    secureTextEntry={true}
+                    placeholder="E-mail"
+                    keyboardType="email-address"
+                    onChangeText={handleChange('email')}
+                    onBlur={handleBlur('email')}
+                    value={values.email}
+                    error={touched.email ? errors.email : ''}
                     autoCorrect={false}
                     autoCapitalize="none"
                     returnKeyType="send"
                     onSubmitEditing={handleSubmit}
                     editable={!loading}
                   />
-                  <ForgetPassword
-                    onPress={() => navigate('ForgetPassword' as never)}>
-                    <ForgetPasswordText>
-                      Esqueceu sua senha?{' '}
-                      <FontAwesome
-                        name="arrow-circle-right"
-                        color={colors.heading}
-                        size={16}
-                      />
-                    </ForgetPasswordText>
-                  </ForgetPassword>
                 </Main>
                 <Footer style={footerButtonStyle}>
                   <Button
                     loading={loading}
                     onPress={handleSubmit}
-                    text="Entrar"
+                    text="Confirmar"
                   />
                 </Footer>
               </Form>
