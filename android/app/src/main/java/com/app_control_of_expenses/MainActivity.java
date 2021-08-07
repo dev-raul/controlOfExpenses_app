@@ -1,4 +1,4 @@
-package com.app_control_of_expenses;
+package com.MyMoney;
 
 import com.facebook.react.ReactActivity;
 
@@ -10,6 +10,6 @@ public class MainActivity extends ReactActivity {
    */
   @Override
   protected String getMainComponentName() {
-    return "app_control_of_expenses";
+    return "MyMoney";
   }
 }

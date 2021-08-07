@@ -14,7 +14,7 @@ import {
   Form,
   ForgetPassword,
   ForgetPasswordText,
-} from './styles';
+} from '../styles';
 import logoMoneyLottie from '../../../assets/lottie/graph.json';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import {useTheme} from 'styled-components';
@@ -26,6 +26,7 @@ import {
   interpolate,
   Extrapolate,
 } from 'react-native-reanimated';
+import {useNavigation} from '@react-navigation/core';
 interface SignInData {
   username: string;
   password: string;
@@ -33,7 +34,7 @@ interface SignInData {
 const {width} = Dimensions.get('screen');
 export const SignIn = () => {
   const {colors} = useTheme();
-
+  const {navigate} = useNavigation();
   const [loading, setLoading] = useState(false);
 
   const startAnimated = useSharedValue(0);
@@ -73,7 +74,6 @@ export const SignIn = () => {
 
   return (
     <Container>
-      {/* <ScrollContent> */}
       <Content>
         <ScrollContent>
           <Formik
@@ -125,7 +125,8 @@ export const SignIn = () => {
                     onSubmitEditing={handleSubmit}
                     editable={!loading}
                   />
-                  <ForgetPassword>
+                  <ForgetPassword
+                    onPress={() => navigate('ForgetPassword' as never)}>
                     <ForgetPasswordText>
                       Esqueceu sua senha?{' '}
                       <FontAwesome
@@ -148,7 +149,6 @@ export const SignIn = () => {
           </Formik>
         </ScrollContent>
       </Content>
-      {/* </ScrollContent> */}
     </Container>
   );
 };

@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-               BuildableName = "app_control_of_expenses.app"
-               BlueprintName = "app_control_of_expenses"
-               ReferencedContainer = "container:app_control_of_expenses.xcodeproj">
+               BuildableName = "MyMoney.app"
+               BlueprintName = "MyMoney"
+               ReferencedContainer = "container:MyMoney.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "00E356ED1AD99517003FC87E"
-               BuildableName = "app_control_of_expensesTests.xctest"
-               BlueprintName = "app_control_of_expensesTests"
-               ReferencedContainer = "container:app_control_of_expenses.xcodeproj">
+               BuildableName = "MyMoneyTests.xctest"
+               BlueprintName = "MyMoneyTests"
+               ReferencedContainer = "container:MyMoney.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -55,9 +55,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "app_control_of_expenses.app"
-            BlueprintName = "app_control_of_expenses"
-            ReferencedContainer = "container:app_control_of_expenses.xcodeproj">
+            BuildableName = "MyMoney.app"
+            BlueprintName = "MyMoney"
+            ReferencedContainer = "container:MyMoney.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -72,9 +72,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "app_control_of_expenses.app"
-            BlueprintName = "app_control_of_expenses"
-            ReferencedContainer = "container:app_control_of_expenses.xcodeproj">
+            BuildableName = "MyMoney.app"
+            BlueprintName = "MyMoney"
+            ReferencedContainer = "container:MyMoney.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
