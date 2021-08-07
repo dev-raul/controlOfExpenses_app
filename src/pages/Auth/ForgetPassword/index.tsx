@@ -1,18 +1,16 @@
 import {Button, Container, Input} from '@components';
 import {Formik} from 'formik';
 import React, {useCallback, useEffect, useState} from 'react';
-import Lottie from 'lottie-react-native';
 import {
   ScrollContent,
   Content,
   Header,
   Main,
   Footer,
+  LogoText,
   SubTitle,
   Form,
 } from '../styles';
-import logoMoneyLottie from '../../../assets/lottie/graph.json';
-import {Dimensions} from 'react-native';
 import {
   Easing,
   Extrapolate,
@@ -23,10 +21,10 @@ import {
 } from 'react-native-reanimated';
 import {ForgetPasswordSchemaValidatorData} from '@helpers';
 import {useNavigation} from '@react-navigation/core';
+import {ConfirmationParams} from '../../../@types';
 interface ForgetPasswordData {
   email: string;
 }
-const {width} = Dimensions.get('screen');
 export const ForgetPassword = () => {
   const [loading, setLoading] = useState(false);
   const {navigate} = useNavigation();
@@ -65,7 +63,15 @@ export const ForgetPassword = () => {
       setLoading(true);
       setTimeout(() => {
         setLoading(false);
-        navigate('Confirmation' as never);
+        const params: ConfirmationParams = {
+          emotion: '📬️',
+          description:
+            'Você receberá uma mensagem no seu endereço de email para prosseguir com a recuperação.',
+          onConfirm: () => {
+            navigate('SignIn' as never);
+          },
+        };
+        navigate('Confirmation' as never, params as never);
       }, 5000);
     },
     [navigate],
@@ -88,14 +94,9 @@ export const ForgetPassword = () => {
             }) => (
               <Form style={fadeStyle}>
                 <Header>
-                  <Lottie
-                    style={{height: width * 0.6}}
-                    resizeMode="contain"
-                    source={logoMoneyLottie}
-                    autoPlay
-                  />
+                  <LogoText>😀️</LogoText>
                   <SubTitle>
-                    Informe o seu email para prosseguir com a recuperação 😀️
+                    Informe o seu email para prosseguir com a recuperação
                   </SubTitle>
                 </Header>
                 <Main>
