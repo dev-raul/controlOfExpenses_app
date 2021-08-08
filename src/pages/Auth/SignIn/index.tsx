@@ -1,5 +1,8 @@
 import {Button, Container, Input} from '@components';
-import {SignInSchemaValidatorData} from '@helpers';
+import {
+  SignInSchemaValidatorData,
+  SignUpUserNameSchemaValidatorData,
+} from '@helpers';
 import {Formik} from 'formik';
 import React, {useCallback, useEffect, useRef, useState} from 'react';
 import {Dimensions, TextInput} from 'react-native';
@@ -12,8 +15,10 @@ import {
   Footer,
   LogoText,
   Form,
-  ForgetPassword,
-  ForgetPasswordText,
+  RedirectSignUp,
+  RedirectSignUpText,
+  RedirectForgetPassword,
+  RedirectForgetPasswordText,
 } from '../styles';
 import logoMoneyLottie from '../../../assets/lottie/graph.json';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
@@ -27,16 +32,28 @@ import {
   Extrapolate,
 } from 'react-native-reanimated';
 import {useNavigation} from '@react-navigation/core';
+import {SignUpParamsParams} from '../../../@types';
 interface SignInData {
   username: string;
   password: string;
 }
+
 const {width} = Dimensions.get('screen');
 export const SignIn = () => {
   const {colors} = useTheme();
   const {navigate} = useNavigation();
   const [loading, setLoading] = useState(false);
 
+  const SidnUpParams: SignUpParamsParams = {
+    initialValues: {username: ''},
+    emotion: '😃️',
+    subTitle: 'Precisamos que você informe seu username',
+    handleSubmit: values => {
+      console.log('values teste', values);
+    },
+    SingUpValidatorSchema: SignUpUserNameSchemaValidatorData,
+    page: 'username',
+  };
   const startAnimated = useSharedValue(0);
   useEffect(() => {
     startAnimated.value = withTiming(1, {
@@ -125,17 +142,17 @@ export const SignIn = () => {
                     onSubmitEditing={handleSubmit}
                     editable={!loading}
                   />
-                  <ForgetPassword
+                  <RedirectForgetPassword
                     onPress={() => navigate('ForgetPassword' as never)}>
-                    <ForgetPasswordText>
+                    <RedirectForgetPasswordText>
                       Esqueceu sua senha?{' '}
                       <FontAwesome
                         name="arrow-circle-right"
                         color={colors.heading}
                         size={16}
                       />
-                    </ForgetPasswordText>
-                  </ForgetPassword>
+                    </RedirectForgetPasswordText>
+                  </RedirectForgetPassword>
                 </Main>
                 <Footer style={footerButtonStyle}>
                   <Button
@@ -144,6 +161,15 @@ export const SignIn = () => {
                     text="Entrar"
                   />
                 </Footer>
+                <RedirectSignUp
+                  onPress={() =>
+                    navigate('SignUp' as never, SidnUpParams as never)
+                  }>
+                  <RedirectSignUpText>Não tem conta?</RedirectSignUpText>
+                  <RedirectSignUpText style={{color: colors.primary}}>
+                    Inscreva-se
+                  </RedirectSignUpText>
+                </RedirectSignUp>
               </Form>
             )}
           </Formik>

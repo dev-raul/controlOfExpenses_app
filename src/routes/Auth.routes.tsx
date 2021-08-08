@@ -1,8 +1,9 @@
 import React from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import {SignIn, ForgetPassword, Confirmation} from '@pages';
+import {SignIn, ForgetPassword, Confirmation, SignUp} from '@pages';
 import {useTheme} from 'styled-components';
 import {HeaderTitleLogo} from '@components';
+
 const Stack = createNativeStackNavigator();
 
 export const AuthRoutes = () => {
@@ -28,6 +29,8 @@ export const AuthRoutes = () => {
       />
       <Stack.Screen name="ForgetPassword" component={ForgetPassword} />
       <Stack.Screen name="Confirmation" component={Confirmation} />
+      {/* SignUp */}
+      <Stack.Screen name="SignUp" component={SignUp} />
     </Stack.Navigator>
   );
 };
