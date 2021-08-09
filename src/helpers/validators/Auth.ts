@@ -1,9 +1,14 @@
 import * as Yup from 'yup';
 
-export const SignUpUserNameSchemaValidatorData = Yup.object().shape({
+export const UserNameSchemaValidatorData = Yup.object().shape({
   username: Yup.string()
     .min(4, 'mínimo de 4 caracteres')
     .required('username obrigatório'),
+});
+export const UserEmailSchemaValidatorData = Yup.object().shape({
+  email: Yup.string()
+    .required('email obrigatório')
+    .email('email inválido, ex: mail@mymoney.com'),
 });
 
 export const SignInSchemaValidatorData = Yup.object()
@@ -32,9 +37,7 @@ export const SignInSchemaValidatorData = Yup.object()
       )
       .min(6, 'mínimo de 6 caracteres'),
   })
-  .concat(SignUpUserNameSchemaValidatorData);
-export const ForgetPasswordSchemaValidatorData = Yup.object().shape({
-  email: Yup.string()
-    .required('email obrigatório')
-    .email('email inválido, ex: mail@mymoney.com'),
-});
+  .concat(UserNameSchemaValidatorData);
+export const ForgetPasswordSchemaValidatorData = Yup.object()
+  .shape({})
+  .concat(UserEmailSchemaValidatorData);

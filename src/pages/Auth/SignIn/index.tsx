@@ -1,8 +1,5 @@
 import {Button, Container, Input} from '@components';
-import {
-  SignInSchemaValidatorData,
-  SignUpUserNameSchemaValidatorData,
-} from '@helpers';
+import {SignInSchemaValidatorData} from '@helpers';
 import {Formik} from 'formik';
 import React, {useCallback, useEffect, useRef, useState} from 'react';
 import {Dimensions, TextInput} from 'react-native';
@@ -32,7 +29,7 @@ import {
   Extrapolate,
 } from 'react-native-reanimated';
 import {useNavigation} from '@react-navigation/core';
-import {SignUpParamsParams} from '../../../@types';
+import {getConfigNavigationUserName} from '../SignUp/UserName';
 interface SignInData {
   username: string;
   password: string;
@@ -41,19 +38,9 @@ interface SignInData {
 const {width} = Dimensions.get('screen');
 export const SignIn = () => {
   const {colors} = useTheme();
-  const {navigate} = useNavigation();
+  const navigation = useNavigation();
   const [loading, setLoading] = useState(false);
 
-  const SidnUpParams: SignUpParamsParams = {
-    initialValues: {username: ''},
-    emotion: '😃️',
-    subTitle: 'Precisamos que você informe seu username',
-    handleSubmit: values => {
-      console.log('values teste', values);
-    },
-    SingUpValidatorSchema: SignUpUserNameSchemaValidatorData,
-    page: 'username',
-  };
   const startAnimated = useSharedValue(0);
   useEffect(() => {
     startAnimated.value = withTiming(1, {
@@ -143,7 +130,9 @@ export const SignIn = () => {
                     editable={!loading}
                   />
                   <RedirectForgetPassword
-                    onPress={() => navigate('ForgetPassword' as never)}>
+                    onPress={() =>
+                      navigation.navigate('ForgetPassword' as never)
+                    }>
                     <RedirectForgetPasswordText>
                       Esqueceu sua senha?{' '}
                       <FontAwesome
@@ -160,16 +149,21 @@ export const SignIn = () => {
                     onPress={handleSubmit}
                     text="Entrar"
                   />
+                  <RedirectSignUp
+                    onPress={() => {
+                      const SidnUpParams =
+                        getConfigNavigationUserName(navigation);
+                      navigation.navigate(
+                        'SignUp' as never,
+                        SidnUpParams as never,
+                      );
+                    }}>
+                    <RedirectSignUpText>Não tem conta?</RedirectSignUpText>
+                    <RedirectSignUpText style={{color: colors.primary}}>
+                      Inscreva-se
+                    </RedirectSignUpText>
+                  </RedirectSignUp>
                 </Footer>
-                <RedirectSignUp
-                  onPress={() =>
-                    navigate('SignUp' as never, SidnUpParams as never)
-                  }>
-                  <RedirectSignUpText>Não tem conta?</RedirectSignUpText>
-                  <RedirectSignUpText style={{color: colors.primary}}>
-                    Inscreva-se
-                  </RedirectSignUpText>
-                </RedirectSignUp>
               </Form>
             )}
           </Formik>

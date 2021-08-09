@@ -14,6 +14,7 @@ import {
   Header,
 } from '../styles';
 import {Emotion} from './styles';
+import {UserEmail} from './UserEmail';
 import {UserName} from './UserName';
 export const SignUp = () => {
   const routes = useRoute();
@@ -65,6 +66,16 @@ export const SignUp = () => {
                 <Main>
                   {page === 'username' && (
                     <UserName
+                      loading={loading}
+                      handleSubmit={handleSubmitFormik}
+                      values={values}
+                      touched={touched}
+                      errors={errors}
+                      {...formilkPros}
+                    />
+                  )}
+                  {page === 'email' && (
+                    <UserEmail
                       loading={loading}
                       handleSubmit={handleSubmitFormik}
                       values={values}

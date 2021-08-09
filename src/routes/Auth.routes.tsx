@@ -31,6 +31,9 @@ export const AuthRoutes = () => {
       <Stack.Screen name="Confirmation" component={Confirmation} />
       {/* SignUp */}
       <Stack.Screen name="SignUp" component={SignUp} />
+      <Stack.Screen name="UserName" component={SignUp} />
+      <Stack.Screen name="UserEmail" component={SignUp} />
+      {/* end SignUp */}
     </Stack.Navigator>
   );
 };
