@@ -29,7 +29,6 @@ import {
   Extrapolate,
 } from 'react-native-reanimated';
 import {useNavigation} from '@react-navigation/core';
-import {getConfigNavigationUserName} from '../SignUp/UserName';
 interface SignInData {
   username: string;
   password: string;
@@ -122,11 +121,6 @@ export const SignIn = () => {
                     onBlur={handleBlur('password')}
                     value={values.password}
                     error={touched.password ? errors.password : ''}
-                    secureTextEntry={true}
-                    autoCorrect={false}
-                    autoCapitalize="none"
-                    returnKeyType="send"
-                    onSubmitEditing={handleSubmit}
                     editable={!loading}
                   />
                   <RedirectForgetPassword
@@ -151,12 +145,7 @@ export const SignIn = () => {
                   />
                   <RedirectSignUp
                     onPress={() => {
-                      const SidnUpParams =
-                        getConfigNavigationUserName(navigation);
-                      navigation.navigate(
-                        'SignUp' as never,
-                        SidnUpParams as never,
-                      );
+                      navigation.navigate('UserProfile' as never);
                     }}>
                     <RedirectSignUpText>Não tem conta?</RedirectSignUpText>
                     <RedirectSignUpText style={{color: colors.primary}}>

@@ -1,3 +1,4 @@
+import {isDate} from 'date-fns';
 import * as Yup from 'yup';
 
 export const UserNameSchemaValidatorData = Yup.object().shape({
@@ -9,6 +10,15 @@ export const UserEmailSchemaValidatorData = Yup.object().shape({
   email: Yup.string()
     .required('email obrigatório')
     .email('email inválido, ex: mail@mymoney.com'),
+});
+export const UserProfileSchemaValidatorData = Yup.object().shape({
+  name: Yup.string()
+    .required('name obrigatório')
+    .min(4, 'mínimo de 4 caracteres'),
+  birthDay: Yup.date()
+    .test('invalid-birthDay', 'nascimento inválida', value => isDate(value))
+    .required('nascimento obrigatório')
+    .typeError('nascimento obrigatório'),
 });
 
 export const SignInSchemaValidatorData = Yup.object()

@@ -1,59 +1,65 @@
-import React from 'react';
-import {Input} from '@components';
-import {NavigationProp} from '@react-navigation/core';
-import {FormikProps} from 'formik';
-import {SignUpParamsParams} from '../../../@types';
+import React, {useCallback, useState} from 'react';
+import {Button, Input} from '@components';
 import {UserEmailSchemaValidatorData} from '@helpers';
-interface UserEmailProps
-  extends Omit<FormikProps<Object>, 'values' | 'touched'> {
-  loading?: boolean;
-  values: any;
-  touched: any;
-  errors: any;
+import {SignUp} from '.';
+import {Footer, Main} from '../styles';
+import {Formik} from 'formik';
+interface FormirValuesInputs {
+  email: string;
 }
-export const getConfigNavigationUserEmail = (
-  navigation: NavigationProp<{}>,
-): SignUpParamsParams => {
-  // const {navigate} = navigation;
-  return {
-    initialValues: {email: ''},
-    emotion: '😃️',
-    subTitle: 'Agora precisamos que você informe seu email',
-    handleSubmit: values => {
-      console.log('values teste', values);
-      // navigate('SignUp' as never);
-    },
-    SingUpValidatorSchema: UserEmailSchemaValidatorData,
-    page: 'email',
-  };
-};
+const initialValues = {email: ''};
+export const UserEmail = () => {
+  const [loading, setLoading] = useState(false);
+  const handleSubmit = useCallback((values: FormirValuesInputs) => {
+    console.log('values teste', values);
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+    }, 3000);
+  }, []);
 
-export const UserEmail = ({
-  loading,
-  handleChange,
-  handleBlur,
-  values,
-  touched,
-  errors,
-  handleSubmit,
-  ...props
-}: UserEmailProps) => {
   return (
-    <>
-      <Input
-        placeholder="E-mail"
-        keyboardType="email-address"
-        onChangeText={handleChange('email')}
-        onBlur={handleBlur('email')}
-        value={values.email}
-        error={touched.email ? errors.email : ''}
-        autoCorrect={false}
-        autoCapitalize="none"
-        returnKeyType="next"
-        onSubmitEditing={handleSubmit}
-        editable={!loading}
-        {...props}
-      />
-    </>
+    <SignUp
+      emotion="😃️"
+      subTitle="Agora precisamos que você informe seu email">
+      <Formik
+        validationSchema={UserEmailSchemaValidatorData}
+        initialValues={initialValues}
+        onSubmit={handleSubmit}>
+        {({
+          handleSubmit: handleSubmitFormik,
+          handleChange,
+          handleBlur,
+          values,
+          touched,
+          errors,
+        }) => (
+          <>
+            <Main>
+              <Input
+                placeholder="E-mail"
+                keyboardType="email-address"
+                onChangeText={handleChange('email')}
+                onBlur={handleBlur('email')}
+                value={values.email}
+                error={touched.email ? errors.email : ''}
+                autoCorrect={false}
+                autoCapitalize="none"
+                returnKeyType="send"
+                onSubmitEditing={handleSubmitFormik}
+                editable={!loading}
+              />
+            </Main>
+            <Footer>
+              <Button
+                loading={loading}
+                onPress={handleSubmitFormik}
+                text="Prosseguir"
+              />
+            </Footer>
+          </>
+        )}
+      </Formik>
+    </SignUp>
   );
 };

@@ -19,7 +19,7 @@ export const Header = styled.View`
   justify-content: center;
   align-items: center;
 `;
-export const Main = styled.View`
+export const Main = styled(Animated.View)`
   padding: 10px 0;
   width: 100%;
 `;
