@@ -2,7 +2,8 @@ import {Button, Input} from '@components';
 import {UserNameSchemaValidatorData} from '@helpers';
 import {useNavigation} from '@react-navigation/core';
 import {Formik} from 'formik';
-import React, {useCallback, useEffect, useState} from 'react';
+import React, {useCallback, useEffect, useRef, useState} from 'react';
+import {TextInput} from 'react-native';
 import {
   Extrapolate,
   interpolate,
@@ -16,15 +17,22 @@ import {Footer, Main} from '../styles';
 
 interface FormirValuesInputs {
   username: string;
+  password: string;
+  passwordConfirmation: string;
 }
 
-const initialValues: FormirValuesInputs = {username: ''};
+const initialValues: FormirValuesInputs = {
+  username: '',
+  password: '',
+  passwordConfirmation: '',
+};
 
-export const UserName = () => {
+export const UserCredentials = () => {
   const navigation = useNavigation();
   const [loading, setLoading] = useState(false);
   const startAnimated = useSharedValue(0);
-
+  const passwordRef = useRef<TextInput>(null);
+  const passwordConfirmationRef = useRef<TextInput>(null);
   useEffect(() => {
     startAnimated.value = withTiming(1, {
       duration: 1200,
@@ -58,14 +66,16 @@ export const UserName = () => {
       setLoading(true);
       setTimeout(() => {
         setLoading(false);
-        navigation.navigate('UserEmail' as never);
+        navigation.navigate('SignIn' as never);
       }, 3000);
     },
     [navigation],
   );
 
   return (
-    <SignUp emotion="😃️" subTitle="Precisamos que você informe seu username">
+    <SignUp
+      emotion="🔐️"
+      subTitle="Para finalizar o cadastro informe suas credenciais">
       <Formik
         validationSchema={UserNameSchemaValidatorData}
         initialValues={initialValues}
@@ -89,6 +99,38 @@ export const UserName = () => {
                 autoCorrect={false}
                 autoCapitalize="none"
                 returnKeyType="send"
+                onSubmitEditing={() => passwordRef.current?.focus()}
+                editable={!loading}
+              />
+              <Input
+                ref={passwordRef}
+                secureTextEntry
+                placeholder="Senha"
+                onChangeText={handleChange('password')}
+                onBlur={handleBlur('password')}
+                value={values.password}
+                error={touched.password ? errors.password : ''}
+                autoCorrect={false}
+                autoCapitalize="none"
+                returnKeyType="next"
+                onSubmitEditing={() => passwordRef.current?.focus()}
+                editable={!loading}
+              />
+              <Input
+                ref={passwordConfirmationRef}
+                secureTextEntry
+                placeholder="Confirmar Senha"
+                onChangeText={handleChange('passwordConfirmation')}
+                onBlur={handleBlur('passwordConfirmation')}
+                value={values.passwordConfirmation}
+                error={
+                  touched.passwordConfirmation
+                    ? errors.passwordConfirmation
+                    : ''
+                }
+                autoCorrect={false}
+                autoCapitalize="none"
+                returnKeyType="next"
                 onSubmitEditing={handleSubmitFormik}
                 editable={!loading}
               />
@@ -97,7 +139,7 @@ export const UserName = () => {
               <Button
                 loading={loading}
                 onPress={handleSubmitFormik}
-                text="Prosseguir"
+                text="Cadastrar"
               />
             </Footer>
           </>

@@ -70,7 +70,7 @@ export const UserProfile = () => {
       setLoading(true);
       setTimeout(() => {
         setLoading(false);
-        navigation.navigate('UserEmail' as never);
+        navigation.navigate('UserContact' as never);
       }, 3000);
     },
     [navigation],
@@ -102,7 +102,7 @@ export const UserProfile = () => {
                 autoCorrect={false}
                 autoCapitalize="none"
                 returnKeyType="next"
-                onSubmitEditing={handleSubmitFormik}
+                onSubmitEditing={toggleShowDatePicker}
                 editable={!loading}
               />
               {Platform.OS === 'android' && (
@@ -116,10 +116,8 @@ export const UserProfile = () => {
                         : ''
                     }
                     error={touched.birthDay ? (errors.birthDay as string) : ''}
-                    onSubmitEditing={handleSubmitFormik}
                     editable={false}
                     pointerEvents="none"
-                    onFocus={() => console.log('onFocus')}
                   />
                 </TouchableOpacity>
               )}

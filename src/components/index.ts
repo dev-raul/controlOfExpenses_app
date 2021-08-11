@@ -1,4 +1,4 @@
 export * from './Container';
-export {default as Input} from './Input';
+export * from './Input';
 export * from './Button';
 export * from './HeaderTitleLogo';

@@ -116,6 +116,7 @@ export const SignIn = () => {
                   />
                   <Input
                     ref={passwordRef}
+                    secureTextEntry
                     placeholder="Senha"
                     onChangeText={handleChange('password')}
                     onBlur={handleBlur('password')}
