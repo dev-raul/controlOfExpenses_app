@@ -1,4 +1,5 @@
 import {rgba} from 'polished';
+import TextInputMaskNative from 'react-native-text-input-mask';
 import styled, {css} from 'styled-components/native';
 
 export const Container = styled.View`
@@ -11,6 +12,24 @@ interface TextInputProps {
   isError?: boolean;
 }
 export const TextInput = styled.TextInput<TextInputProps>`
+  border-width: 1.5px;
+  border-color: ${({isFocused, isValue, theme}) =>
+    isFocused || isValue ? theme.colors.primary : theme.colors.gray};
+  color: ${({theme}) => theme.colors.heading};
+  font-size: 14px;
+  padding: 0 15px;
+  height: 46px;
+  width: 100%;
+  background: ${({theme}) => rgba(theme.colors.shape, 0.03)};
+  border-radius: 6px;
+
+  ${({isError, theme}) =>
+    isError &&
+    css`
+      border-color: ${theme.colors.red};
+    `}
+`;
+export const TextInputMask = styled(TextInputMaskNative)<TextInputProps>`
   border-width: 1.5px;
   border-color: ${({isFocused, isValue, theme}) =>
     isFocused || isValue ? theme.colors.primary : theme.colors.gray};

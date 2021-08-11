@@ -12,8 +12,10 @@ import {
   Footer,
   LogoText,
   Form,
-  ForgetPassword,
-  ForgetPasswordText,
+  RedirectSignUp,
+  RedirectSignUpText,
+  RedirectForgetPassword,
+  RedirectForgetPasswordText,
 } from '../styles';
 import logoMoneyLottie from '../../../assets/lottie/graph.json';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
@@ -31,10 +33,11 @@ interface SignInData {
   username: string;
   password: string;
 }
+
 const {width} = Dimensions.get('screen');
 export const SignIn = () => {
   const {colors} = useTheme();
-  const {navigate} = useNavigation();
+  const navigation = useNavigation();
   const [loading, setLoading] = useState(false);
 
   const startAnimated = useSharedValue(0);
@@ -113,29 +116,27 @@ export const SignIn = () => {
                   />
                   <Input
                     ref={passwordRef}
+                    secureTextEntry
                     placeholder="Senha"
                     onChangeText={handleChange('password')}
                     onBlur={handleBlur('password')}
                     value={values.password}
                     error={touched.password ? errors.password : ''}
-                    secureTextEntry={true}
-                    autoCorrect={false}
-                    autoCapitalize="none"
-                    returnKeyType="send"
-                    onSubmitEditing={handleSubmit}
                     editable={!loading}
                   />
-                  <ForgetPassword
-                    onPress={() => navigate('ForgetPassword' as never)}>
-                    <ForgetPasswordText>
+                  <RedirectForgetPassword
+                    onPress={() =>
+                      navigation.navigate('ForgetPassword' as never)
+                    }>
+                    <RedirectForgetPasswordText>
                       Esqueceu sua senha?{' '}
                       <FontAwesome
                         name="arrow-circle-right"
                         color={colors.heading}
                         size={16}
                       />
-                    </ForgetPasswordText>
-                  </ForgetPassword>
+                    </RedirectForgetPasswordText>
+                  </RedirectForgetPassword>
                 </Main>
                 <Footer style={footerButtonStyle}>
                   <Button
@@ -143,6 +144,15 @@ export const SignIn = () => {
                     onPress={handleSubmit}
                     text="Entrar"
                   />
+                  <RedirectSignUp
+                    onPress={() => {
+                      navigation.navigate('UserProfile' as never);
+                    }}>
+                    <RedirectSignUpText>Não tem conta?</RedirectSignUpText>
+                    <RedirectSignUpText style={{color: colors.primary}}>
+                      Inscreva-se
+                    </RedirectSignUpText>
+                  </RedirectSignUp>
                 </Footer>
               </Form>
             )}

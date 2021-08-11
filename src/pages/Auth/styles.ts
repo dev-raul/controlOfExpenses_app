@@ -19,7 +19,7 @@ export const Header = styled.View`
   justify-content: center;
   align-items: center;
 `;
-export const Main = styled.View`
+export const Main = styled(Animated.View)`
   padding: 10px 0;
   width: 100%;
 `;
@@ -39,19 +39,34 @@ export const SubTitle = styled.Text`
   color: ${({theme}) => theme.colors.heading};
   font-family: ${({theme}) => theme.fonts.text};
 `;
-export const ForgetPassword = styled.TouchableOpacity`
-  justify-content: center;
+export const RedirectForgetPassword = styled.TouchableOpacity`
+  justify-content: flex-end;
   align-items: center;
+  flex-direction: row;
   width: 100%;
   margin: 7px 0;
 `;
-export const ForgetPasswordText = styled.Text`
+export const RedirectForgetPasswordText = styled.Text`
+  font-size: 14px;
+  text-align: right;
+  color: ${({theme}) => theme.colors.heading};
+  font-family: ${({theme}) => theme.fonts.text};
+  padding: 3px;
+`;
+export const RedirectSignUp = styled.TouchableOpacity`
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  width: 100%;
+  margin: 7px 0;
+`;
+export const RedirectSignUpText = styled.Text`
   font-size: 14px;
   text-align: center;
   color: ${({theme}) => theme.colors.heading};
   font-family: ${({theme}) => theme.fonts.text};
+  padding: 3px;
 `;
-
 export const Form = styled(Animated.View)`
   flex: 1;
   width: 100%;

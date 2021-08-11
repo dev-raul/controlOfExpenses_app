@@ -4,3 +4,7 @@ export interface ConfirmationParams {
   onConfirm: () => void;
   buttonText?: string;
 }
+export interface SignUpParamsParams {
+  emotion?: string;
+  subTitle?: string;
+}
