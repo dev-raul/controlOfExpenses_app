@@ -11,11 +11,10 @@ const persistConfig = {
   blacklist: [],
 };
 
-export type Store = StateType<typeof rootReducer>;
-
 const persistedReducer = persistReducer(persistConfig, rootReducer);
-
 const sagaMiddleware = createSagaMiddleware();
+
+export type Store = StateType<typeof rootReducer>;
 export const store = createStore(
   persistedReducer,
   applyMiddleware(sagaMiddleware),

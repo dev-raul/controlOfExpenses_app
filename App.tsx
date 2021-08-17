@@ -18,7 +18,7 @@ export const App = () => {
     }
   }, [deviceTheme]);
   return (
-    <Provider store={store}>
+    <Provider store={store} key="provider">
       <PersistGate loading={null} persistor={persistor}>
         <ThemeProvider theme={theme}>
           <NavigationContainer>
