@@ -2,7 +2,7 @@ import React from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {SignIn, ForgetPassword, Confirmation} from '@pages';
 import {useTheme} from 'styled-components';
-import {HeaderTitleLogo} from '@components';
+import {Header} from '@components';
 import {UserCredentials} from '@pages/Auth/SignUp/UserCredentials';
 import {UserContact} from '@pages/Auth/SignUp/UserContact';
 import {UserProfile} from '@pages/Auth/SignUp/UserProfile';
@@ -23,7 +23,7 @@ export const AuthRoutes = () => {
           color: colors.heading,
         },
         headerTintColor: colors.heading,
-        headerTitle: () => <HeaderTitleLogo />,
+        header: props => <Header {...props} />,
       }}>
       <Stack.Screen
         options={{header: () => null}}

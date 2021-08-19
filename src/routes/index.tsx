@@ -5,6 +5,7 @@ import {Store} from '../store';
 import {AuthActions} from '../store/modules/auth/reducer';
 
 import {AuthRoutes} from './Auth.routes';
+import {SignedRoutes} from './Signed.routes';
 
 const Routes = () => {
   const dispatch = useDispatch();
@@ -17,7 +18,7 @@ const Routes = () => {
     return <View />;
   }
 
-  return signed ? <View /> : <AuthRoutes />;
+  return signed ? <SignedRoutes /> : <AuthRoutes />;
 };
 
 export default Routes;

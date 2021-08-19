@@ -3,7 +3,7 @@ import React from 'react';
 import {Container, LogoTitle} from './styles';
 import Lottie from 'lottie-react-native';
 import logoMoneyLottie from '../../assets/lottie/graph.json';
-const HEADER_HEIGHT = 20;
+const HEADER_HEIGHT = 30;
 export const HeaderTitleLogo = () => {
   return (
     <Container>

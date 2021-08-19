@@ -54,7 +54,7 @@ const setToken = (
 ): ImmutableObject<INITIAL_STATE_STORE> =>
   state.merge({
     token: action.token,
-    signed: true,
+    // signed: true,
     loading: false,
   });
 
