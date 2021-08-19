@@ -4,17 +4,19 @@ import {createStore, applyMiddleware} from 'redux';
 import {persistReducer, persistStore} from 'redux-persist';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {rootSaga, rootReducer} from './modules';
+import {PersistConfig} from 'redux-persist/es/types';
 
-const persistConfig = {
+export type Store = StateType<typeof rootReducer>;
+
+const persistConfig: PersistConfig<Store> = {
   key: 'root',
   storage: AsyncStorage,
-  blacklist: [],
+  blacklist: ['Auth'],
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 const sagaMiddleware = createSagaMiddleware();
 
-export type Store = StateType<typeof rootReducer>;
 export const store = createStore(
   persistedReducer,
   applyMiddleware(sagaMiddleware),
