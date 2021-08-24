@@ -2,7 +2,7 @@ import {Dimensions} from 'react-native';
 import Animated from 'react-native-reanimated';
 import styled from 'styled-components/native';
 const {width} = Dimensions.get('screen');
-export const ScrollContent = styled.View`
+export const ScrollContent = styled.ScrollView`
   flex: 1;
   width: 100%;
 `;

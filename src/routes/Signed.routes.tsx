@@ -23,11 +23,7 @@ export const SignedRoutes = () => {
         headerTintColor: colors.heading,
         header: props => <Header {...props} />,
       }}>
-      <Stack.Screen
-        options={{header: () => null, headerShown: false}}
-        name="Extracts"
-        component={Extracts}
-      />
+      <Stack.Screen name="Extracts" component={Extracts} />
     </Stack.Navigator>
   );
 };
